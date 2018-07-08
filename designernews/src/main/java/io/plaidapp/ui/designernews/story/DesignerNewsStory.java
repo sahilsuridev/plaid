@@ -869,9 +869,9 @@ public class DesignerNewsStory extends Activity {
                 comment.getUserDisplayName();
                 holder.getAuthor().setText(comment.getUserDisplayName().toLowerCase());
                 holder.getAuthor().setOriginalPoster(isOP(comment.getUserId()));
-                comment.getCreated_at();
+                comment.getCreatedAt();
                 holder.getTimeAgo().setText(
-                        DateUtils.getRelativeTimeSpanString(comment.getCreated_at().getTime(),
+                        DateUtils.getRelativeTimeSpanString(comment.getCreatedAt().getTime(),
                                 System.currentTimeMillis(),
                                 DateUtils.SECOND_IN_MILLIS)
                                 .toString().toLowerCase());

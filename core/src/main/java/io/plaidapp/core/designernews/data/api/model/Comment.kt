@@ -16,24 +16,21 @@
 
 package io.plaidapp.core.designernews.data.api.model
 
-import android.os.Parcelable
-import kotlinx.android.parcel.Parcelize
 import java.util.Date
 
 /**
  * Models a comment on a designer news story.
  */
-@Parcelize
 data class Comment(
     val id: Long,
     val parentComment: Long?,
     val body: String,
-    val created_at: Date,
+    val createdAt: Date,
     val depth: Int,
     val voteCount: Int,
     val replies: List<Comment>,
     val userId: Long?,
-    val userDisplayName: String,
+    val userDisplayName: String?,
     val userPortraitUrl: String?,
     var upvoted: Boolean
-) : Parcelable
+)

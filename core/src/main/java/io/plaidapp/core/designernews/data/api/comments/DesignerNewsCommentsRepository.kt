@@ -106,7 +106,7 @@ class DesignerNewsCommentsRepository(
                     it.vote_count,
                     commentReplies.orEmpty(),
                     user?.id,
-                    user?.displayName.orEmpty(),
+                    user?.displayName,
                     user?.portraitUrl,
                     false)
         }
@@ -114,11 +114,13 @@ class DesignerNewsCommentsRepository(
 
     private suspend fun buildCommentsWithUsers(replies: List<List<CommentResponse>>): Result<List<Comment>> {
         val usersResult = getUsersForComments(replies)
-        // no users, no data displayed. Ignore the error case for now
-        if (usersResult is Result.Success) {
-            return Result.Success(matchUsersWithComments(replies, usersResult.data))
+        // no users, no user data displayed.
+        val userData = if (usersResult is Result.Success) {
+            usersResult.data
+        } else {
+            emptyList()
         }
-        return Result.Error(IOException("Unable to get user data"))
+        return Result.Success(matchUsersWithComments(replies, userData))
     }
 
     private suspend fun getUsersForComments(comments: List<List<CommentResponse>>): Result<List<User>> {
